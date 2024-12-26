@@ -91,3 +91,21 @@ const initGame = () => {
 updateFoodPosition();
 setIntervalId = setInterval(initGame, 100);
 document.addEventListener("keyup", changeDirection);
+const colorPicker = document.getElementById("snake-color");
+
+let snakeColor = "#60CBFF"; // Default color
+colorPicker.addEventListener("change", (e) => {
+    snakeColor = e.target.value;
+});
+
+const initGame = () => {
+    if (gameOver) return handleGameOver();
+    let html = `<div class="food" style="grid-area: ${foodY} / ${foodX}"></div>`;
+
+    // Generate snake body
+    for (let i = 0; i < snakeBody.length; i++) {
+        html += `<div class="head" style="grid-area: ${snakeBody[i][1]} / ${snakeBody[i][0]}; background: ${snakeColor};"></div>`;
+    }
+
+    playBoard.innerHTML = html;
+};
